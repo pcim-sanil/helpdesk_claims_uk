@@ -4,7 +4,7 @@
 DEFINE('DB_USER', 'root');
 DEFINE('DB_PASSWORD', 'abc123');
 DEFINE('DB_HOST', '192.168.0.120');
-DEFINE('DB_NAME', '1300_staging');
+DEFINE('DB_NAME', '1300');
 
 // Make the connection:
 $link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die("Couldn't make connection.");

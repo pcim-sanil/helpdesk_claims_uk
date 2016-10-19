@@ -44,7 +44,7 @@
                                                     2
                                                 </span>
                                                 <span class="desc">
-                                                    <i class="fa fa-check"></i> Address Details
+                                                    <i class="fa fa-check"></i> Beneficiary Details
                                                 </span>
                                             </a>
                                         </li>
@@ -110,6 +110,39 @@
                                             </div>
 
                                             <?php
+                                            if($row['caller_number']) :
+                                            ?>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Phone
+                                                    <span class="required">
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <?php
+                                                    $strlen = strlen($row['caller_number']);
+                                                    $prefix = substr($row['caller_number'], 0 ,5);
+                                                    $masklen = $strlen - strlen($prefix);
+                                                    $mask = array_fill(1, $masklen, '*');
+                                                    $maskString = $prefix.implode('',$mask);
+                                                    ?>
+                                                    <script>
+                                                    tel = '<?php echo $row['caller_number']; ?>';
+                                                    prefix = '<?php echo $prefix; ?>';
+                                                    strlen = '<?php echo $strlen; ?>';
+                                                    </script>
+                                                    <input type="text" class="form-control" name="caller_number" value="<?php echo $maskString; ?>" id="caller-number"/>
+                                                    <span class="help-block">
+                                                        For security reasons please provide the last <?php echo $masklen;?> digits of the phone number.
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            endif;
+                                            ?>
+                                            
+
+                                            <?php
                                             $advertisedNames = Utility::getAdvertisedNameList($row['ticket_id']);
 
                                             if (count($advertisedNames) > 1):
@@ -160,9 +193,9 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tab2">
-                                            <h3 class="block">Where do we send the cheque to ? Please provide your details ...</h3>
+                                            <h3 class="block">Please provide your details ...</h3>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Fullname
+                                                <label class="control-label col-md-3">Full Name
                                                     <span class="required">
                                                         *
                                                     </span>
@@ -170,12 +203,12 @@
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="fullname"/>
                                                     <span class="help-block">
-                                                        Please make sure your name is spelled exactly the same as it is in your bank account.
+                                                        Please make sure your name is spelled correctly.
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Unit Number
+                                                <label class="control-label col-md-3">Flat/Apartment Number
                                                     <!--<span class="required">
                                                         *
                                                     </span>-->
@@ -183,7 +216,7 @@
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="unit"/>
                                                     <span class="help-block">
-                                                        Provide your unit number
+                                                        Provide your Flat/Apartment number
                                                     </span>
                                                 </div>
                                             </div>
@@ -214,7 +247,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Suburb
+                                                <label class="control-label col-md-3">Local Area/Village Name
                                                     <span class="required">
                                                         *
                                                     </span>
@@ -222,11 +255,11 @@
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="suburb"/>
                                                     <span class="help-block">
-                                                        Provide your suburb														</span>
+                                                        Provide your local area/village name														</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">State
+                                                <label class="control-label col-md-3">Town
                                                     <span class="required">
                                                         *
                                                     </span>
@@ -234,7 +267,7 @@
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="state"/>
                                                     <span class="help-block">
-                                                        Provide your state</span>
+                                                        Provide your town</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -277,14 +310,14 @@
                                             </div>
                                             <h4 class="form-section">Address</h4>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Fullname</label>
+                                                <label class="control-label col-md-3">Full Name</label>
                                                 <div class="col-md-4">
                                                     <p class="form-control-static" data-display="fullname" id="fullname">
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Unit</label>
+                                                <label class="control-label col-md-3">Flat/Apartment Number</label>
                                                 <div class="col-md-4">
                                                     <p class="form-control-static" data-display="unit" id="unit">
                                                     </p>
@@ -305,14 +338,14 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Suburb:</label>
+                                                <label class="control-label col-md-3">Local area/Village Name</label>
                                                 <div class="col-md-4">
                                                     <p class="form-control-static" data-display="suburb" id="suburb">
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">State:</label>
+                                                <label class="control-label col-md-3">Town</label>
                                                 <div class="col-md-4">
                                                     <p class="form-control-static" data-display="state" id="state">
                                                     </p>
@@ -361,10 +394,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
-                <p>Yes, send me my cheque. By accepting and submitting this refund claim I acknowledge the satisfactory outcome of the negotiations made, and I confirm that I will not escalate matters that relate to this negotiation with my telecommunications provider or any other body.</p>
+                <p>Yes, send me my refund. By accepting and submitting this refund claim I acknowledge the satisfactory outcome of the negotiations made, and I confirm that I will not escalate matters that relate to this negotiation with my telecommunications provider or any other body.</p>
                 <p>By accepting this resolution and the financial compensation, I will not be entitled to any further (future) negotiations, settlements or any other (financial) compensation for usage of the Premium service(s) related to this negotiation.</p>
                 <p>I agree that I will refrain from further usage of this premium service.</p>
-                <p>I acknowledge that I have been informed that I can ask my telephony provider to bar access to 19x/Premium services.</p>
+                <p>I acknowledge that I have been informed that I can ask my telephony provider to bar access to Premium services.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn default" data-dismiss="modal">Ok</button>

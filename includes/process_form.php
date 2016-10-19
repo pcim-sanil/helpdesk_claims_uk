@@ -12,10 +12,8 @@ $u      = '';
 
 if (isset($_POST['mobile']) && $_POST['mobile'] != '' && preg_match("/^[0-9]+$/", $_POST['mobile'])) {
     $m = strip_tags(trim($_POST['mobile']));
-    if (!preg_match("/^61[0-9]+/", $_POST['mobile'])) {
-        $m = ltrim($m, '/\0/');
-        $m = '61' . $m;
-    }
+    $suffix = substr($m, -10);
+    $m      = '44' . $suffix;
 } else {
     $errors['mobile'] = 'Please enter a valid mobile number!';
 }
@@ -92,8 +90,8 @@ if (empty($errors)) {
     $q = "INSERT INTO claims (mobile, amount, fullname, unit, street_no, street, suburb, state, postcode, ticket_id, created_date) VALUES ('$m', $a , '$f', '$u', '$s', '$st', '$su', '$sta','$p', $t, now())";
     $r = mysql_query($q);
 
-    $query = "INSERT INTO refund_cheque(name,amount_eligible,amount_agreed,unit,street_no,street,suburb,state,postcode,status,created_date,updated_date,ticket_id,mobile,sms_service_short_code_id, refund_source)
-VALUES ('$f', $e, $a, '$u', '$s', '$st', '$su', '$sta','$p', 1,now(), now(), $t, $m, $ad, 'claims')";
+    $query = "INSERT INTO refund_text(name,refund_mobile,amount_eligible,amount_agreed,unit,street_no,street,suburb,state,postcode,status,created_date,updated_date,ticket_id,mobile,sms_service_short_code_id, refund_source)
+VALUES ('$f', '$m', $e, $a, '$u', '$s', '$st', '$su', '$sta','$p', 1,now(), now(), $t, '$m', $ad, 'claims')";
     $r = mysql_query($query);
 
     $que = "UPDATE tickets SET status='3' WHERE ticket_id='$t'";

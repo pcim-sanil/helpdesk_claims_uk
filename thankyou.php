@@ -14,7 +14,7 @@
         <!-- END PAGE HEADER-->
         <!-- BEGIN PAGE CONTENT-->
         <div class="alert alert-success">
-            <strong>Success!</strong> Thank you for sending us your request. We will process it soon.
+            <strong>Success!</strong> Thank you for sending us your claim. We will process it soon.
         </div>
         <!-- END PAGE CONTENT-->
     </div>

@@ -43,6 +43,10 @@
         // initiate layout and plugins
         App.init();
         FormWizard.init();
+        
+        $('#caller-number').focus(function(){
+            $('#caller-number').val(prefix);
+        });
     });
 </script>
 <!-- END JAVASCRIPTS -->

@@ -34,6 +34,11 @@ var FormWizard = function () {
                     amount: {
                         required: true
                     },
+                    caller_number: {
+                        required: true,
+                        digits: true,
+                        minlength: strlen
+                    },
                     fullname: {
                         required: true
                     },
@@ -54,7 +59,6 @@ var FormWizard = function () {
                         required: true
                     },
                     postcode: {
-                        digits: true,
                         required: true,
                         minlength: 3
                     },
@@ -165,6 +169,13 @@ var FormWizard = function () {
                     error.hide();
 
                     if (form.valid() == false) {
+                        return false;
+                    }
+
+                    if($('#caller-number').val()!=tel){
+
+                        $('#caller-number').val(prefix);
+                        alert("Phone number you entered does not match with the phone number in system.");
                         return false;
                     }
 

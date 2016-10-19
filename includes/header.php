@@ -37,6 +37,12 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
         <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
         <!-- END THEME STYLES -->
         <link rel="shortcut icon" href="favicon.ico"/>
+
+        <script type="text/javascript">
+            var prefix = '';
+            var tel = '';
+            var strlen = 11;
+        </script>
     </head>
     <!-- END HEAD -->
     <!-- BEGIN BODY -->
