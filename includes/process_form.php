@@ -85,6 +85,39 @@ if (isset($_POST['sms_service_short_code_id']) && $_POST['sms_service_short_code
 }
 
 if (empty($errors)) {
+
+    // check if refund already claimed
+
+    $q = "SELECT caller_number,eligible_amount,propose_amount,ticket_id, created_date, claimed_on from email where userkey='" . $_SESSION['id']."'";
+
+    $result = mysql_query($q);
+    $row    = mysql_fetch_array($result);
+
+    if (!empty($row)) {
+
+        if (!empty($row['claimed_on'])) {
+            exit('CLAIMED');
+        }
+
+        /**
+         * Check if link has expired
+         */
+        $expiryCheckQuery = "SELECT caller_number,eligible_amount,propose_amount,ticket_id,created_date, claimed_on from email where userkey = '" . $_SESSION['id']."' AND created_date > DATE_SUB(NOW(), INTERVAL 48 HOUR)";
+
+        $r1  = mysql_query($expiryCheckQuery);
+        $rw1 = mysql_fetch_array($r1);
+
+        if (empty($rw1)) {
+            exit('EXPIRED');
+        }
+
+    }
+
+
+
+
+
+
     // OK to proceed!
     // Add the page to the database:
     $q = "INSERT INTO claims (mobile, amount, fullname, unit, street_no, street, suburb, state, postcode, ticket_id, created_date) VALUES ('$m', $a , '$f', '$u', '$s', '$st', '$su', '$sta','$p', $t, now())";
@@ -107,5 +140,5 @@ VALUES ('$f', '$m', $e, $a, '$u', '$s', '$st', '$su', '$sta','$p', 1,now(), now(
     // Clear $_POST:
     $_POST = array();
 
-    echo true;
+    exit('OK');
 }

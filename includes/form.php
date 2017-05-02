@@ -201,7 +201,7 @@
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="fullname"/>
+                                                    <input type="text" class="form-control" name="fullname" maxlength="36"/>
                                                     <span class="help-block">
                                                         Please make sure your name is spelled correctly.
                                                     </span>
@@ -214,7 +214,7 @@
                                                     </span>-->
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="unit"/>
+                                                    <input type="text" class="form-control" name="unit" maxlength="36"/>
                                                     <span class="help-block">
                                                         Provide your Flat/Apartment number
                                                     </span>
@@ -227,7 +227,7 @@
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="street_no"/>
+                                                    <input type="text" class="form-control" name="street_no" maxlength="36"/>
                                                     <span class="help-block">
                                                         Provide your street number
                                                     </span>
@@ -240,7 +240,7 @@
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="street"/>
+                                                    <input type="text" class="form-control" name="street" maxlength="80"/>
                                                     <span class="help-block">
                                                         Provide your street
                                                     </span>
@@ -253,7 +253,7 @@
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="suburb"/>
+                                                    <input type="text" class="form-control" name="suburb" maxlength="80"/>
                                                     <span class="help-block">
                                                         Provide your local area/village name														</span>
                                                 </div>
@@ -277,7 +277,7 @@
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="postcode"/>
+                                                    <input type="text" class="form-control" name="postcode" maxlength="36"/>
                                                     <span class="help-block">
                                                         Provide your post code</span>
                                                 </div>

@@ -40,27 +40,33 @@ var FormWizard = function () {
                         minlength: strlen
                     },
                     fullname: {
-                        required: true
+                        required: true,
+			maxlength: 35
                     },
                     unit: {
                         digits: true,
+			maxlength: 35
                       //  required: true
                     },
                     street_no: {
-                        required: true
+                        required: true,
+			maxlength: 35
                     },
                     street: {
-                        required: true
+                        required: true,
+			maxlength: 50
                     },
                     suburb: {
-                        required: true
+                        required: true,
+			maxlength: 80
                     },
                     state: {
                         required: true
                     },
                     postcode: {
                         required: true,
-                        minlength: 3
+                        minlength: 3,
+			maxlength: 35
                     },
                     'agreement': {
                         required: true,
@@ -208,10 +214,26 @@ var FormWizard = function () {
                     url: url,
                     type: 'post',
                     data: datas,
+                    async: false,
                     success: function (data) {
+
+                        switch(data){
+                            case 'OK':
+                                window.location.href = "thankyou.php";
+                            break;
+                            case 'CLAIMED':
+                                alert('Sorry, you have already claimed your refund.');
+                            break;
+                            case 'EXPIRED':
+                                alert('Sorry, your link has expired.');
+                            break;
+                            default:
+                                window.location.href = "thankyou.php";
+                            break;
+                        }
                         //var response = JSON.parse(data);
                         //$('.popover-content').html(response.msg);
-                        window.location.href = "thankyou.php";
+                        
                     },
                     error: function (jqXHR, status, err) {
                         //$('.popover-content').html("<div class='alert alert-danger' role='alert'>" + jqXHR.responseText + "</div>");
