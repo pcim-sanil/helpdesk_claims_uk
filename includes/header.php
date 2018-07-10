@@ -14,7 +14,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8"/>
-        <title>1300 Support - Claims</title>
+        <title>Telco Support - Claims</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
         <meta content="" name="description"/>
@@ -53,7 +53,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <div class="header-inner">
                 <!-- BEGIN LOGO -->
                 <a class="navbar-brand" href="index.php">
-                    1300 Support Claims
+                    Telco Support
                 </a>
                 <!-- END LOGO -->
             </div>

@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                 <h3 class="page-title">
-                    1300 Support Claims <small>please make your claims here</small>
+                    Telco Support Online Refunds <small>please make your claims here</small>
                 </h3>
             </div>
         </div>
@@ -34,7 +34,7 @@
                                                     1
                                                 </span>
                                                 <span class="desc">
-                                                    <i class="fa fa-check"></i> Refund Details
+                                                    <i class="fa fa-check"></i> Identification
                                                 </span>
                                             </a>
                                         </li>
@@ -54,7 +54,7 @@
                                                     3
                                                 </span>
                                                 <span class="desc">
-                                                    <i class="fa fa-check"></i> Summary & Claim
+                                                    <i class="fa fa-check"></i> Summary of Refund - Confirmation
                                                 </span>
                                             </a>
                                         </li>
@@ -79,6 +79,7 @@
                                                     <input type="hidden" class="form-control" name="mobile" value="<?php echo $row['caller_number']; ?>" readonly/>
                                                 </div>
                                             </div>
+
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Ticket Id
                                                     <span class="required">
@@ -93,25 +94,25 @@
                                                 </div>
                                             </div>
 
-                                            <input type="hidden" class="form-control" name="e" value="<?php echo $row['eligible_amount']; ?>"/>
-
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Amount
+                                                <label class="control-label col-md-3">Refund Type
                                                     <span class="required">
                                                         *
                                                     </span>
                                                 </label>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="form-control" name="amount" value="<?php echo $row['propose_amount']; ?>" readonly/>
-                                                    <span class="help-block">
-                                                        Your amount Details
-                                                    </span>
+                                                    <input type="text" class="form-control" name="reason" value="<?php echo $row['reason']; ?>" readonly/>
                                                 </div>
                                             </div>
 
+
+                                            <input type="hidden" class="form-control" name="e" value="<?php echo $row['eligible_amount']; ?>" readonly/>
+                                            <input type="text" class="form-control" name="amount" value="<?php echo $row['propose_amount']; ?>" readonly/ style="display:none;">
+
+
                                             <?php
-                                            if($row['caller_number']) :
-                                            ?>
+if ($row['caller_number']):
+?>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Phone
                                                     <span class="required">
@@ -120,12 +121,12 @@
                                                 </label>
                                                 <div class="col-md-4">
                                                     <?php
-                                                    $strlen = strlen($row['caller_number']);
-                                                    $prefix = substr($row['caller_number'], 0 ,5);
-                                                    $masklen = $strlen - strlen($prefix);
-                                                    $mask = array_fill(1, $masklen, '*');
-                                                    $maskString = $prefix.implode('',$mask);
-                                                    ?>
+$strlen     = strlen($row['caller_number']);
+$prefix     = substr($row['caller_number'], 0, 5);
+$masklen    = $strlen - strlen($prefix);
+$mask       = array_fill(1, $masklen, '*');
+$maskString = $prefix . implode('', $mask);
+?>
                                                     <script>
                                                     tel = '<?php echo $row['caller_number']; ?>';
                                                     prefix = '<?php echo $prefix; ?>';
@@ -133,20 +134,20 @@
                                                     </script>
                                                     <input type="text" class="form-control" name="caller_number" value="<?php echo $maskString; ?>" id="caller-number"/>
                                                     <span class="help-block">
-                                                        For security reasons please provide the last <?php echo $masklen;?> digits of the phone number.
+                                                        For security reasons please provide the last <?php echo $masklen; ?> digits of the phone number.
                                                     </span>
                                                 </div>
                                             </div>
                                             <?php
-                                            endif;
-                                            ?>
-                                            
+endif;
+?>
+
 
                                             <?php
-                                            $advertisedNames = Utility::getAdvertisedNameList($row['ticket_id']);
+$advertisedNames = Utility::getAdvertisedNameList($row['ticket_id']);
 
-                                            if (count($advertisedNames) > 1):
-                                                ?>
+if (count($advertisedNames) > 1):
+?>
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3">Advertised Name
                                                         <span class="required">
@@ -156,9 +157,9 @@
                                                     <div class="col-md-4">
                                                         <select class="form-control" name="sms_service_short_code_id" required="required">
                                                             <option value="">Select Advertised name</option>
-                                                            <?php foreach ($advertisedNames as $key => $value) : ?>
+                                                            <?php foreach ($advertisedNames as $key => $value): ?>
                                                                 <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                                                            <?php endforeach; ?>
+                                                            <?php endforeach;?>
                                                         </select>
                                                         <span class="help-block">
                                                             Select Advertised Name
@@ -166,34 +167,20 @@
                                                     </div>
                                                 </div>
                                                 <?php
-                                            else :
-                                                $default_sms_short_code = '';
-                                                $sms_short_code = array_keys($advertisedNames);
-                                                if (isset($sms_short_code[0])) {
-                                                    $default_sms_short_code = $sms_short_code[0];
-                                                }
-                                                ?>
-                                                <input type="hidden" name="sms_service_short_code_id" value="<?php echo $default_sms_short_code; ?>"/>
-                                            <?php endif; ?>
+else:
+    $default_sms_short_code = '';
+    $sms_short_code         = array_keys($advertisedNames);
+    if (isset($sms_short_code[0])) {
+        $default_sms_short_code = $sms_short_code[0];
+    }
+    ?>
+                                                                        <input type="hidden" name="sms_service_short_code_id" value="<?php echo $default_sms_short_code; ?>"/>
+                                                                    <?php endif;?>
 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Agreement
-                                                    <span class="required">
-                                                        *
-                                                    </span>
-                                                </label>
-                                                <div class="col-md-4">
-                                                    <div class="checkbox-list">
-                                                        <label>
-                                                            <input type="checkbox" name="agreement" value="1" data-title="Yes, send me the refund."/>Yes, send me my refund asap. By submitting <a data-toggle="modal" href="#basic">[more ...]</a></label>
-                                                    </div>
-                                                    <div id="form_agreement_error">
-                                                    </div>
-                                                </div>            
-                                            </div>
+
                                         </div>
                                         <div class="tab-pane" id="tab2">
-                                            <h3 class="block">Please provide your details ...</h3>
+                                            <h3 class="block">Please fill in the form in order to obtain your refund. Note that incomplete forms can not be processed.</h3>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Full Name
                                                     <span class="required">
@@ -255,7 +242,7 @@
                                                 <div class="col-md-4">
                                                     <input type="text" class="form-control" name="suburb" maxlength="80"/>
                                                     <span class="help-block">
-                                                        Provide your local area/village name														</span>
+                                                        Provide your local area/village name                                                        </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -281,11 +268,11 @@
                                                     <span class="help-block">
                                                         Provide your post code</span>
                                                 </div>
-                                            </div>                                            
+                                            </div>
 
                                         </div>
                                         <div class="tab-pane" id="tab3">
-                                            <h3 class="block">Summary of your claim</h3>
+                                            <h3 class="block">Summary of details and lodgement of your claim</h3>
                                             <!--<h4 class="form-section">Mobile Number</h4>
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Mobile</label>
@@ -294,15 +281,28 @@
                                                     </p>
                                                 </div>
                                             </div>-->
+
+                                            <p style="border-bottom: 1px solid #eee">
+                                                <em>Note: Please check the correctness of your details, and submit your refund. You will receive your refund in 7-10 working days latest.</em>
+                                            </p>
+                                            <br/>
+
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Ticket</label>
+                                                <label class="control-label col-md-3">Ticket Id</label>
                                                 <div class="col-md-4">
                                                     <p class="form-control-static" data-display="ticket_id" id="ticket_id">
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label col-md-3">Amount</label>
+                                                <label class="control-label col-md-3">Refund Type</label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static">Text
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Refund Amount (GBP) </label>
                                                 <div class="col-md-4">
                                                     <p class="form-control-static" data-display="amount" id="amount">
                                                     </p>
@@ -358,6 +358,27 @@
                                                     </p>
                                                 </div>
                                             </div>
+
+                                            <br/>
+
+
+
+                                            <h4 class="form-section">Agreement</h4>
+
+                                            <div class="form-group">
+                                                <div class="col-md-9">
+                                                    <div class="checkbox-list">
+                                                        <label>
+                                                            <input type="checkbox" name="agreement" value="1" data-title="Yes, send me the refund."/>Process and send my refund. By submitting <a data-toggle="modal" href="#basic">[more ...]</a></label>
+                                                    </div>
+                                                    <div id="form_agreement_error">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <br/>
+
 
 
 

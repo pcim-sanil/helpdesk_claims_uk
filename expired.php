@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                 <h3 class="page-title">
-                    1300 Support Claims <small>please make your claims here</small>
+                     Telco Support Online Refunds <small>please make your claims here</small>
                 </h3>
             </div>
         </div>

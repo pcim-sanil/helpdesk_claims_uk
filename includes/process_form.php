@@ -102,7 +102,7 @@ if (empty($errors)) {
         /**
          * Check if link has expired
          */
-        $expiryCheckQuery = "SELECT caller_number,eligible_amount,propose_amount,ticket_id,created_date, claimed_on from email where userkey = '" . $_SESSION['id']."' AND created_date > DATE_SUB(NOW(), INTERVAL 48 HOUR)";
+        $expiryCheckQuery = "SELECT caller_number,eligible_amount,propose_amount,ticket_id,created_date, claimed_on from email where userkey = '" . $_SESSION['id']."' AND created_date > DATE_SUB(NOW(), INTERVAL 168 HOUR)";
 
         $r1  = mysql_query($expiryCheckQuery);
         $rw1 = mysql_fetch_array($r1);

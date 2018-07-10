@@ -204,11 +204,22 @@ var FormWizard = function () {
             });
 
             $('#form_wizard_1').find('.button-previous').hide();
-            $('#form_wizard_1 .button-submit').click(function () {
+            $('#form_wizard_1 .button-submit').click(function (e) {
 
                 var $form = $("#submit_form"),
                         datas = $form.serialize(),
                         url = $form.attr('action');
+
+
+                success.hide();
+                error.hide();
+
+                if (form.valid() == false) {
+                        e.preventDefault();
+                        return false;
+                }
+
+
 
                 $.ajax({
                     url: url,

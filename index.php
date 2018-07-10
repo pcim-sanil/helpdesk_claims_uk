@@ -4,12 +4,12 @@ require 'includes/config.inc.php';
 require MYSQL;
 require_once 'includes/Utility.php';
 
-if (filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
+if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
     $id = $_GET['id'];
 
     $_SESSION['id'] = $id;
 
-    $q = "SELECT caller_number,eligible_amount,propose_amount,ticket_id, created_date, claimed_on from email where userkey = $id ";
+    $q = "SELECT e.caller_number, e.eligible_amount, e.propose_amount, e.ticket_id, e.created_date, e.claimed_on, rfr.reason from email as e left join reason_for_refund as rfr on rfr.id = e.reason_for_refund where e.userkey = $id ";
 
     $result = mysql_query($q);
     $row    = mysql_fetch_array($result);
@@ -26,7 +26,7 @@ if (filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
         /**
          * Check if link has expired
          */
-        $expiryCheckQuery = "SELECT caller_number,eligible_amount,propose_amount,ticket_id,created_date, claimed_on from email where userkey = $id AND created_date > DATE_SUB(NOW(), INTERVAL 48 HOUR)";
+        $expiryCheckQuery = "SELECT caller_number,eligible_amount,propose_amount,ticket_id,created_date, claimed_on from email where userkey = $id AND created_date > DATE_SUB(NOW(), INTERVAL 168 HOUR)";
 
         $r1  = mysql_query($expiryCheckQuery);
         $rw1 = mysql_fetch_array($r1);

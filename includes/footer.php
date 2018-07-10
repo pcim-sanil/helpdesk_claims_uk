@@ -2,7 +2,7 @@
 <!-- BEGIN FOOTER -->
 <div class="footer">
     <div class="footer-inner">
-        <?php echo date('Y');?> &copy; 1300 Support Help Desk.
+        <?php echo date('Y');?> &copy; Telcosupport.com
     </div>
     <div class="footer-tools">
         <span class="go-top">
