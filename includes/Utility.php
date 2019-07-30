@@ -31,15 +31,15 @@ class Utility {
 
     public static function getAdvertisedNameList($ticketId) {
         $list = array();
-
+        global $link;
         $sql = "Select ss.id from tickets t join sms_services ss on ss.service_1300 = t.service_1300 where t.ticket_id=$ticketId ";
-        $result = mysql_query($sql);
-        $sms_services = mysql_fetch_assoc($result);
+        $result = mysqli_query($link, $sql);
+        $sms_services = mysqli_fetch_assoc($result);
 
         if (isset($sms_services['id'])) {
             $sql1 = "Select id,advertised_name,short_code from sms_service_short_code where sms_service_id=" . $sms_services['id'];
-            $result1 = mysql_query($sql1);
-            while ($row1 = mysql_fetch_assoc($result1)) {
+            $result1 = mysqli_query($link, $sql1);
+            while ($row1 = mysqli_fetch_assoc($result1)) {
                 $list[$row1['id']] = $row1['advertised_name'] . ' (<i>' . $row1['short_code'] . '</i>)';
             }
         }

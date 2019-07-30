@@ -1,5 +1,7 @@
 
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require 'includes/config.inc.php';
 require MYSQL;
 require_once 'includes/Utility.php';
@@ -11,8 +13,8 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT, array('mi
 
     $q = "SELECT e.caller_number, e.eligible_amount, e.propose_amount, e.ticket_id, e.created_date, e.claimed_on, rfr.reason from email as e left join reason_for_refund as rfr on rfr.id = e.reason_for_refund where e.userkey = $id ";
 
-    $result = mysql_query($q);
-    $row    = mysql_fetch_array($result);
+    $result = mysqli_query($link,$q);
+    $row    = mysqli_fetch_array($result);
 
     if (!empty($row)) {
 
@@ -28,8 +30,8 @@ if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT, array('mi
          */
         $expiryCheckQuery = "SELECT caller_number,eligible_amount,propose_amount,ticket_id,created_date, claimed_on from email where userkey = $id AND created_date > DATE_SUB(NOW(), INTERVAL 168 HOUR)";
 
-        $r1  = mysql_query($expiryCheckQuery);
-        $rw1 = mysql_fetch_array($r1);
+        $r1  = mysqli_query($link,$expiryCheckQuery);
+        $rw1 = mysqli_fetch_array($r1);
 
         if (empty($rw1)) {
             include 'includes/header.php';

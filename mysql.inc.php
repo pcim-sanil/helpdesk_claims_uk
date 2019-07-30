@@ -7,8 +7,8 @@ DEFINE('DB_HOST', '192.168.0.120');
 DEFINE('DB_NAME', '1300');
 
 // Make the connection:
-$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die("Couldn't make connection.");
-$dbc = mysql_select_db(DB_NAME, $link) or die("Couldn't select database.");
+$link = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) or die("Couldn't make connection.");
+$dbc = mysqli_select_db($link, DB_NAME) or die("Couldn't select database.");
 
 session_start();
 // Set the character set:
