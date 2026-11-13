@@ -1,9 +1,9 @@
 <?php
 
 // Set the database access information as constants:
-DEFINE('DB_USER', 'root');
+DEFINE('DB_USER', 'developer');
 DEFINE('DB_PASSWORD', 'abc123');
-DEFINE('DB_HOST', '192.168.0.120');
+DEFINE('DB_HOST', '172.31.52.213');
 DEFINE('DB_NAME', '1300');
 
 // Make the connection:
