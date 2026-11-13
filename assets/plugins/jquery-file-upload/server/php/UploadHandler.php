@@ -673,7 +673,7 @@ class UploadHandler
                 break;
             default:
                 $file->error = 'Failed to create scaled versions: '
-                    .implode($failed_versions,', ');
+                    .implode(', ', $failed_versions);
         }
     }
 

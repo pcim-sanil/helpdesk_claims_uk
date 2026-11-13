@@ -15,12 +15,8 @@ session_start();
 //mysql_set_charset($dbc, 'utf8');
 
 function escape_data($data, $dbc) {
-    // Strip the slashes if Magic Quotes is on:
-    if (get_magic_quotes_gpc())
-        $data = stripslashes($data);
-
-    // Apply trim() and mysqli_real_escape_string():
-    //return mysql_real_escape_string($dbc, trim($data));
+    // Magic Quotes was removed in PHP 8. Input is no longer automatically
+    // escaped, so there are no slashes to strip here.
     return trim($data);
 }
 

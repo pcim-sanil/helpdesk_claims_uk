@@ -6,8 +6,14 @@ require 'includes/config.inc.php';
 require MYSQL;
 require_once 'includes/Utility.php';
 
-if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
-    $id = $_GET['id'];
+$id = filter_input(
+    INPUT_GET,
+    'id',
+    FILTER_VALIDATE_INT,
+    array('options' => array('min_range' => 1))
+);
+
+if ($id !== false && $id !== null) {
 
     $_SESSION['id'] = $id;
 

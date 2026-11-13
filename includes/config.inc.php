@@ -5,7 +5,7 @@ DEFINE('BASE_URI', realpath(__DIR__ . '/..') . "/");
 DEFINE('BASE_URL', 'http://192.168.0.20/helpdesk_claims_uk/');
 DEFINE('MYSQL', BASE_URI . 'mysql.inc.php');
 
-function my_error_handler($e_number, $e_message, $e_file, $e_line, $e_vars)
+function my_error_handler($e_number, $e_message, $e_file, $e_line)
 {
 
     // Build the error message:
